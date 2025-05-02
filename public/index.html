@@ -1,127 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LA-Absensi: Sistem Absensi Cerdas</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LA-Absensi Web</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <header>
-        <h1>LA-Absensi</h1>
-        <p>Sistem Absensi Cerdas dengan Pengenalan Wajah</p>
-    </header>
+  <header>
+    <h1>LA-Absensi</h1>
+    <p>Sistem Absensi Cerdas Berbasis Wajah</p>
+  </header>
 
-    <main>
-        <!-- Dashboard -->
-        <section id="dashboard" class="tab-content active">
-            <h2>Dashboard</h2>
-            <div class="dashboard-container">
-                <div class="video-container">
-                    <h3>Streaming Kamera</h3>
-                    <img id="video-stream" src="" alt="Video Stream" onerror="this.src='https://via.placeholder.com/640x480?text=Stream+Not+Available'">
-                </div>
-                <div class="chart-container">
-                    <h3>Statistik Kehadiran</h3>
-                    <canvas id="attendance-chart"></canvas>
-                </div>
-            </div>
-        </section>
+  <main>
+    <section id="dashboard" class="tab-content active">
+      <h2>Dashboard</h2>
+      <div class="dashboard-container">
+        <div class="video-container">
+          <h3>Streaming Kamera</h3>
+          <img id="video-stream" src="" alt="Streaming Video" />
+        </div>
+        <div class="chart-container">
+          <h3>Statistik Kehadiran</h3>
+          <canvas id="attendance-chart"></canvas>
+        </div>
+      </div>
+    </section>
 
-        <!-- Daftar Mahasiswa -->
-        <section id="students" class="tab-content">
-            <h2>Daftar Mahasiswa</h2>
-            <table id="student-table">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Status</th>
-                        <th>Waktu Kehadiran</th>
-                        <th>Mata Kuliah</th>
-                    </tr>
-                </thead>
-                <tbody id="student-table-body"></tbody>
-            </table>
-        </section>
+    <section id="students" class="tab-content">
+      <h2>Daftar Mahasiswa</h2>
+      <table id="student-table">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Status</th>
+            <th>Waktu</th>
+            <th>Mata Kuliah</th>
+          </tr>
+        </thead>
+        <tbody id="student-table-body"></tbody>
+      </table>
+    </section>
 
-        <!-- Jadwal Mata Kuliah -->
-        <section id="course-schedule" class="tab-content">
-            <h2>Jadwal Absen Mata Kuliah</h2>
-            <form id="course-schedule-form">
-                <label for="course-name">Nama Mata Kuliah:</label>
-                <input type="text" id="course-name" required>
-                <label for="course-date">Tanggal:</label>
-                <input type="date" id="course-date" required>
-                <label for="course-start-time">Waktu Mulai:</label>
-                <input type="time" id="course-start-time" required>
-                <label for="course-end-time">Waktu Selesai:</label>
-                <input type="time" id="course-end-time" required>
-                <button type="submit">Simpan Jadwal</button>
-            </form>
-        </section>
+    <section id="course-schedule" class="tab-content">
+      <h2>Jadwal Kuliah</h2>
+      <form id="course-schedule-form">
+        <label>Nama Mata Kuliah</label>
+        <input type="text" id="course-name" required />
+        <label>Tanggal</label>
+        <input type="date" id="course-date" required />
+        <label>Waktu Mulai</label>
+        <input type="time" id="course-start-time" required />
+        <label>Waktu Selesai</label>
+        <input type="time" id="course-end-time" required />
+        <button type="submit">Simpan Jadwal</button>
+      </form>
+    </section>
 
-        <!-- Jadwal Perorangan -->
-        <section id="individual-schedule" class="tab-content">
-            <h2>Jadwal Absen Perorangan</h2>
-            <form id="individual-schedule-form">
-                <label for="person-name">Nama:</label>
-                <input type="text" id="person-name" required>
-                <label for="individual-date">Tanggal:</label>
-                <input type="date" id="individual-date" required>
-                <label for="individual-start-time">Waktu Mulai:</label>
-                <input type="time" id="individual-start-time" required>
-                <label for="individual-end-time">Waktu Selesai:</label>
-                <input type="time" id="individual-end-time" required>
-                <button type="submit">Simpan Jadwal</button>
-            </form>
-        </section>
+    <section id="individual-schedule" class="tab-content">
+      <h2>Jadwal Perorangan</h2>
+      <form id="individual-schedule-form">
+        <label>Nama Mahasiswa</label>
+        <input type="text" id="person-name" required />
+        <label>Tanggal</label>
+        <input type="date" id="individual-date" required />
+        <label>Waktu Mulai</label>
+        <input type="time" id="individual-start-time" required />
+        <label>Waktu Selesai</label>
+        <input type="time" id="individual-end-time" required />
+        <button type="submit">Simpan Jadwal</button>
+      </form>
+    </section>
 
-        <!-- Kontrol -->
-        <section id="controls" class="tab-content">
-            <h2>Kontrol Perangkat</h2>
-            <div class="control-container">
-                <div class="control-group">
-                    <h3>Kontrol Pintu</h3>
-                    <button onclick="publishCommand('lintas_alam/door', 'OPEN')">Buka Pintu</button>
-                    <button onclick="publishCommand('lintas_alam/door', 'CLOSE')">Tutup Pintu</button>
-                </div>
-                <div class="control-group">
-                    <h3>Kontrol LED ESP32-CAM</h3>
-                    <button onclick="publishCommand('lintas_alam/lampu', 'ON')">LED ON</button>
-                    <button onclick="publishCommand('lintas_alam/lampu', 'OFF')">LED OFF</button>
-                </div>
-                <div class="control-group">
-                    <h3>Kontrol OLED</h3>
-                    <input type="text" id="oled-message" placeholder="Masukkan pesan">
-                    <button onclick="publishOledMessage()">Kirim ke OLED</button>
-                </div>
-                <div class="control-group">
-                    <h3>Kontrol Ultrasonik</h3>
-                    <button onclick="publishCommand('lintas_alam/ultrasonic', 'ON')">Ultrasonik ON</button>
-                    <button onclick="publishCommand('lintas_alam/ultrasonic', 'OFF')">Ultrasonik OFF</button>
-                </div>
-            </div>
-        </section>
-    </main>
+    <section id="controls" class="tab-content">
+      <h2>Kontrol Perangkat</h2>
+      <div class="control-group">
+        <h3>Pintu</h3>
+        <button onclick="publishCommand('lintas_alam/door', 'OPEN')">Buka</button>
+        <button onclick="publishCommand('lintas_alam/door', 'CLOSE')">Tutup</button>
+      </div>
+      <div class="control-group">
+        <h3>LED ESP32-CAM</h3>
+        <button onclick="publishCommand('lintas_alam/lampu', 'ON')">ON</button>
+        <button onclick="publishCommand('lintas_alam/lampu', 'OFF')">OFF</button>
+      </div>
+      <div class="control-group">
+        <h3>OLED</h3>
+        <input type="text" id="oled-message" placeholder="Pesan ke OLED" />
+        <button onclick="publishOledMessage()">Kirim</button>
+      </div>
+      <div class="control-group">
+        <h3>Ultrasonik</h3>
+        <button onclick="publishCommand('lintas_alam/ultrasonic', 'ON')">ON</button>
+        <button onclick="publishCommand('lintas_alam/ultrasonic', 'OFF')">OFF</button>
+      </div>
+    </section>
+  </main>
 
-    <nav>
-        <ul>
-            <li><a href="#dashboard" class="nav-link active" onclick="switchTab('dashboard')">Dashboard</a></li>
-            <li><a href="#students" class="nav-link" onclick="switchTab('students')">Mahasiswa</a></li>
-            <li><a href="#course-schedule" class="nav-link" onclick="switchTab('course-schedule')">Jadwal Kuliah</a></li>
-            <li><a href="#individual-schedule" class="nav-link" onclick="switchTab('individual-schedule')">Jadwal Perorangan</a></li>
-            <li><a href="#controls" class="nav-link" onclick="switchTab('controls')">Kontrol</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="#dashboard" class="nav-link active" onclick="switchTab('dashboard')">Dashboard</a></li>
+      <li><a href="#students" class="nav-link" onclick="switchTab('students')">Mahasiswa</a></li>
+      <li><a href="#course-schedule" class="nav-link" onclick="switchTab('course-schedule')">Kuliah</a></li>
+      <li><a href="#individual-schedule" class="nav-link" onclick="switchTab('individual-schedule')">Perorangan</a></li>
+      <li><a href="#controls" class="nav-link" onclick="switchTab('controls')">Kontrol</a></li>
+    </ul>
+  </nav>
 
-    <footer>
-        <p>&copy; 2025 AchmadAlvin. All rights reserved.</p>
-    </footer>
+  <footer><p>&copy; 2025 AchmadAlvin</p></footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/mqtt@4.3.7/dist/mqtt.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <script src="js/mqtt.js"></script>
-    <script src="js/chart.js"></script>
-    <script src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/mqtt.js"></script>
 </body>
 </html>
