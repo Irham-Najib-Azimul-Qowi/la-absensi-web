@@ -1,35 +1,29 @@
-let attendanceChart;
+let chart;
+async function loadChart() {
+  const res = await fetch("https://la-absensi-web.vercel.app/api/get-messages");
+  const data = await res.json();
 
-function initializeChart() {
-    const ctx = document.getElementById('attendance-chart').getContext('2d');
-    attendanceChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Hadir', 'Tidak Hadir'],
-            datasets: [{
-                data: [0, 0],
-                backgroundColor: ['#3498db', '#e74c3c']
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'top' },
-                title: { display: true, text: 'Persentase Kehadiran' }
-            }
-        }
-    });
+  let hadir = 0, absen = 0;
+  const now = new Date();
+
+  data.forEach(d => {
+    const waktu = new Date(d.timestamp);
+    const delay = (now - waktu) / (1000 * 60);
+    if (delay <= 60) hadir++;
+    else absen++;
+  });
+
+  const ctx = document.getElementById("attendance-chart").getContext("2d");
+  chart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Hadir", "Belum Hadir"],
+      datasets: [{
+        data: [hadir, absen],
+        backgroundColor: ["#4CAF50", "#F44336"]
+      }]
+    }
+  });
 }
 
-function updateAttendanceChart() {
-    fetch('https://your-vercel-app.vercel.app/api/get-messages')
-        .then(response => response.json())
-        .then(data => {
-            const totalStudents = new Set(data.map(item => item.name)).size;
-            const presentStudents = new Set(data.filter(item => item.status === 'Hadir').map(item => item.name)).size;
-            const absentStudents = totalStudents - presentStudents;
-            attendanceChart.data.datasets[0].data = [presentStudents, absentStudents];
-            attendanceChart.update();
-        })
-        .catch(error => console.error('Error updating chart:', error));
-}
+document.addEventListener("DOMContentLoaded", loadChart);
