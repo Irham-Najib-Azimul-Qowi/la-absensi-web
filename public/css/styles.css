@@ -1,0 +1,128 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 80px; /* Space for navbar */
+}
+
+.section {
+    margin-bottom: 40px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #1f3a44;
+    margin-bottom: 20px;
+}
+
+.dashboard-content {
+    display: flex;
+    gap: 20px;
+}
+
+.video-container, .chart-container {
+    flex: 1;
+}
+
+.video-container img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.chart-container canvas {
+    max-width: 300px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #1f3a44;
+    color: #fff;
+}
+
+tr.hadir {
+    background-color: #e6f3e6;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #1f3a44;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #2a5f7a;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-group button, .control-group input {
+    margin-right: 10px;
+}
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1f3a44;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #a3d7ff;
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        flex-direction: column;
+    }
+}
