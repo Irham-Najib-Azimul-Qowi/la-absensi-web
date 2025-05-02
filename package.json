@@ -1,12 +1,6 @@
 {
-    "name": "la-absensi-web",
-    "version": "1.0.0",
-    "description": "Web-based attendance system",
-    "main": "index.js",
-    "dependencies": {
-        "mongodb": "^4.8.0"
-    },
-    "scripts": {
-        "start": "node index.js"
-    }
+  "name": "la-absensi-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module"
 }
