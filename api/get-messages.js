@@ -1,19 +1,18 @@
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
-module.exports = async (req, res) => {
-    const uri = process.env.MONGODB_URI;
-    const client = new MongoClient(uri);
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri);
+const dbName = "absensi";
+const collectionName = "attendance";
 
-    try {
-        await client.connect();
-        const database = client.db('absensi');
-        const collection = database.collection('attendance');
-        const data = await collection.find({}).toArray();
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Error fetching from MongoDB:', error);
-        res.status(500).json({ error: 'Failed to fetch data' });
-    } finally {
-        await client.close();
-    }
-};
+export default async function handler(req, res) {
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+    const results = await collection.find({}).sort({ timestamp: -1 }).toArray();
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
